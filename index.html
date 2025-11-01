@@ -109,7 +109,7 @@
             <div class="text-center bg-white p-8 md:p-12 rounded-xl shadow-lg">
                 <div class="flex flex-col md:flex-row items-center justify-center md:justify-start space-y-6 md:space-y-0 md:space-x-8 mb-10">
                     <div class="w-32 h-32 md:w-40 md:h-40 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-4 border-blue-200 shadow-inner flex-shrink-0">
-                        <!-- IMAGEN DE PERFIL AGREGADA AQUÍ --><img src="fotooscar.jpeg" alt="Foto de perfil de Oscar De los Santos" class="object-cover w-full h-full">
+                        <img src="fotooscar.jpeg" alt="Foto de perfil de Oscar De los Santos" class="object-cover w-full h-full">
                     </div>
                     <div>
                         <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2 md:text-left">Oscar Enrique De los Santos</h1>
@@ -123,7 +123,7 @@
                         <span class="text-sm text-blue-600">Años de Experiencia</span>
                     </div>
                     <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                        <span class="block text-2xl font-bold text-blue-700">D2 y E1</span>
+                        <span class="block text-2xl font-bold text-blue-700">D1, D3, E</span>
                         <span class="text-sm text-blue-600">Licencias Vigentes</span>
                     </div>
                     <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
@@ -266,7 +266,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     <div>
                         <h3 class="text-2xl font-bold mb-6">Información Personal y Contacto</h3>
-                        <div class="space-y-4 mb-8 text-lg">
+                        
+                        <div class="space-y-4 mb-8 text-md">
                             <p class="flex items-center">
                                 <span class="text-blue-600 w-6 text-center mr-3 text-xl" aria-hidden="true">☎</span>
                                 <a href="https://wa.me/5493434726155" target="_blank" class="hover:text-blue-600 hover:underline">0343-154726155 (WhatsApp)</a>
@@ -275,24 +276,28 @@
                                 <span class="text-blue-600 w-6 text-center mr-3 text-xl" aria-hidden="true">✉</span>
                                 <a href="mailto:pelado138@hotmail.com" class="hover:text-blue-600 hover:underline">pelado138@hotmail.com</a>
                             </p>
+                            <p class="flex items-center">
+                                <span class="text-blue-600 w-6 text-center mr-3 text-xl" aria-hidden="true">🌐</span>
+                                <a href="https://cv-oscardelossantos.vercel.app/" target="_blank" class="hover:text-blue-600 hover:underline">cv-oscardelossantos.vercel.app</a>
+                            </p>
                             <p class="flex items-start">
                                 <span class="text-blue-600 w-6 text-center mr-3 pt-1 text-xl" aria-hidden="true">⌖</span>
-                                <span>Pascual Greca 823, Paraná, Entre Ríos (CP 3100)</span>
+                                <span class="flex-1">Pascual Greca 823, Paraná, Entre Ríos (CP 3100)</span>
                             </p>
                         </div>
                         <h3 class="text-2xl font-bold mb-6">Datos Adicionales</h3>
                         <div class="grid grid-cols-2 gap-4 text-gray-700">
-                            <div><strong class="text-gray-900">Edad:</strong> 41 años</div>
+                            <div id="edad-web"><strong class="text-gray-900">Edad:</strong> 42 años</div>
                             <div><strong class="text-gray-900">DNI:</strong> 30.164.016</div>
                             <div><strong class="text-gray-900">Nacionalidad:</strong> Argentina</div>
-                            <div><strong class="text-gray-900">Estado civil:</strong> Soltero (con hijo)</div>
+                            <div><strong class="text-gray-900">Estado civil:</strong> Soltero (1 hijo)</div>
                         </div>
                     </div>
                     <div>
                         <h3 class="text-2xl font-bold mb-6">Credenciales y Referencias</h3>
                         <div class="bg-gray-50 p-6 rounded-lg border">
                             <h4 class="text-xl font-semibold text-gray-800 mb-3">Licencias de Conducir</h4>
-                            <p class="text-blue-700 text-lg font-bold mb-5">Clases D2 y E1 (vigentes)</p>
+                            <p class="text-blue-700 text-lg font-bold mb-5">Clases D1, D3, E (vigentes)</p>
                             
                             <h4 class="text-xl font-semibold text-gray-800 mb-3">Referencias Laborales</h4>
                             <div class="space-y-4">
@@ -326,34 +331,42 @@
         </div>
     </footer>
 
-    <!-- Contenedor Oculto para Generar el PDF --><div id="cv-a4-container" class="hidden absolute left-[-9999px] top-0 w-[210mm] h-[297mm] bg-white">
+    
+    <div id="cv-a4-container" class="hidden absolute left-[-9999px] top-0 w-[210mm] h-[297mm] bg-white">
         <div id="cv-a4-content" class="flex w-full h-full">
             
-            <!-- Barra Lateral (Azul) --><aside class="w-[35%] h-full bg-blue-700 text-white p-6 flex flex-col">
-                <div class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-4 border-blue-200 shadow-inner mx-auto">
-                    <!-- IMAGEN DE PERFIL AGREGADA AL PDF AQUÍ --><img src="fotooscar.jpeg" alt="Foto de perfil de Oscar De los Santos" class="object-cover w-full h-full">
+            
+            <aside class="w-[35%] h-full bg-blue-700 text-white p-6 flex flex-col">
+                
+                
+                <div class="mx-auto"> 
+                    <img src="fotooscar.jpeg" alt="Foto de perfil" 
+                         class="object-cover w-32 h-32 rounded-full border-4 border-blue-200 shadow-inner" 
+                         id="pdf-profile-pic">
                 </div>
                 <h1 class="text-2xl font-bold text-center mt-4">Oscar Enrique De los Santos</h1>
                 <p class="text-lg text-blue-100 text-center font-medium">Chofer Profesional</p>
                 
-                <hr class="border-t-2 border-blue-400 my-4">
+                <hr class="border-t-2 border-blue-400 my-2.5">
 
                 <h2 class="text-lg font-bold text-blue-100 uppercase tracking-wider mb-2">Contacto</h2>
-                <div class="space-y-2 text-sm">
+                
+                <div class="space-y-1 text-xs"> 
                     <p>☎ 0343-154726155</p>
                     <p>✉ pelado138@hotmail.com</p>
+                    <p>🌐 cv-oscardelossantos.vercel.app</p>
                     <p>⌖ P. Greca 823, Paraná, ER</p>
                 </div>
 
-                <hr class="border-t border-blue-400 my-4">
+                <hr class="border-t-2 border-blue-400 my-2.5">
                 
                 <h2 class="text-lg font-bold text-blue-100 uppercase tracking-wider mb-2">Licencias</h2>
-                <p class="text-lg font-bold">Clases D2 y E1 (Vigentes)</p>
+                <p class="text-lg font-bold">Clases D1, D3, E (Vigentes)</p>
 
-                <hr class="border-t border-blue-400 my-4">
+                <hr class="border-t-2 border-blue-400 my-2.5">
                 
                 <h2 class="text-lg font-bold text-blue-100 uppercase tracking-wider mb-2">Habilidades</h2>
-                <ul class="list-disc list-inside text-sm space-y-1">
+                <ul class="list-disc list-inside text-sm space-y-0.5"> 
                     <li>Conducción Responsable</li>
                     <li>Excelente Trato Interpersonal</li>
                     <li>Conocimiento de Rutas</li>
@@ -364,10 +377,10 @@
                     <li>Operador de PC</li>
                 </ul>
                 
-                <hr class="border-t border-blue-400 my-4">
+                <hr class="border-t-2 border-blue-400 my-2.5">
 
                 <h2 class="text-lg font-bold text-blue-100 uppercase tracking-wider mb-2">Formación</h2>
-                <div class="space-y-3 text-sm">
+                <div class="space-y-1.5 text-sm"> 
                     <div>
                         <p class="font-bold">Adm. de Empresas (2 años)</p>
                         <p class="text-blue-100">Instituto Santa Teresita</p>
@@ -382,19 +395,20 @@
                     </div>
                 </div>
 
-                <hr class="border-t border-blue-400 my-4">
+                <hr class="border-t-2 border-blue-400 my-2.5">
 
                 <h2 class="text-lg font-bold text-blue-100 uppercase tracking-wider mb-2">Datos</h2>
-                <div class="space-y-1 text-sm">
-                    <p><strong>Edad:</strong> 41 años</p>
+                <div class="space-y-1 text-sm"> 
+                    <p id="edad-pdf"><strong>Edad:</strong> 42 años</p>
                     <p><strong>DNI:</strong> 30.164.016</p>
                     <p><strong>Nacionalidad:</strong> Argentina</p>
-                    <p><strong>Estado Civil:</strong> Soltero (con hijo)</p>
+                    <p><strong>Estado Civil:</strong> Soltero (1 hijo)</p>
                     <p><strong>Disponibilidad:</strong> Full Time</p>
                 </div>
             </aside>
 
-            <!-- Contenido Principal (Blanco) --><main class="w-[65%] h-full p-6 text-gray-900 overflow-y-hidden">
+            
+            <main class="w-[65%] h-full p-6 text-gray-900 overflow-y-hidden">
                 <section class="mb-4">
                     <h2 class="text-xl font-bold text-blue-700 uppercase tracking-wider border-b-2 border-blue-700 pb-1 mb-2">Perfil Profesional</h2>
                     <p class="text-xs leading-snug">
@@ -405,7 +419,8 @@
                 <section class="mb-4">
                     <h2 class="text-xl font-bold text-blue-700 uppercase tracking-wider border-b-2 border-blue-700 pb-1 mb-3">Experiencia Laboral</h2>
                     <div class="space-y-3">
-                        <!-- Experiencia Principal --><div class="text-xs">
+                        
+                        <div class="text-xs">
                             <p class="text-sm font-bold">Chofer de transporte urbano de pasajeros</p>
                             <p class="font-semibold text-gray-700">Transporte Mariano Moreno (Nov 2009 - Actualidad)</p>
                             <ul class="list-disc list-inside pl-2 text-gray-800 leading-snug">
@@ -414,7 +429,8 @@
                                 <li>Control mecánico diario del vehículo.</li>
                             </ul>
                         </div>
-                        <!-- Otras Experiencias --><div class="text-xs">
+                        
+                        <div class="text-xs">
                             <p class="text-sm font-bold">Repartidor de correspondencia y medicamentos</p>
                             <p class="font-semibold text-gray-700">Correo Privado Sercar (Provincial)</p>
                         </div>
@@ -467,6 +483,34 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Lógica de Cálculo de Edad ---
+            function calculateAge(birthDate) {
+                const today = new Date();
+                const birth = new Date(birthDate);
+                let age = today.getFullYear() - birth.getFullYear();
+                const monthDifference = today.getMonth() - birth.getMonth();
+                if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birth.getDate())) {
+                    age--;
+                }
+                return age;
+            }
+            
+            const birthDate = '1983-04-11'; // Fecha de nacimiento de Oscar
+            const age = calculateAge(birthDate);
+            
+            // Actualizar edad en la página web
+            const edadWebEl = document.getElementById('edad-web');
+            if (edadWebEl) {
+                edadWebEl.innerHTML = `<strong class="text-gray-900">Edad:</strong> ${age} años`;
+            }
+            
+            // Actualizar edad en el PDF
+            const edadPdfEl = document.getElementById('edad-pdf');
+            if (edadPdfEl) {
+                edadPdfEl.innerHTML = `<strong>Edad:</strong> ${age} años`;
+            }
+
             // --- Lógica del Menú Hamburguesa ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -543,6 +587,7 @@
                 const mobileText = document.getElementById('download-text-mobile');
                 
                 const pdfContainer = document.getElementById('cv-a4-container');
+                
 
                 // Mostrar estado de carga
                 downloadText.classList.add('hidden');
@@ -555,7 +600,7 @@
                 // Mostrar el contenedor oculto para que html2canvas lo capture
                 pdfContainer.classList.remove('hidden');
                 pdfContainer.classList.add('flex'); // Aseguramos que se muestre
-
+                
                 // *Fix de Robustez*: Esperar un breve momento para que el navegador renderice el div
                 setTimeout(() => {
                     html2canvas(pdfContainer, {
