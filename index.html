@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Profesional - Oscar E. De los Santos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="Gemini_Generated_Image_deumn8deumn8deum.png">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .nav-link.active {
+            color: #2563EB;
+            font-weight: 600;
+            border-bottom: 2px solid #2563EB;
+        }
+        
+        .animated-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        
+        .animated-fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 44px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Estilos para el contenedor del CV A4 oculto */
+        #cv-a4-container {
+            position: absolute;
+            left: -9999px; /* Lo saca de la pantalla */
+            top: 0;
+            width: 210mm; /* Ancho A4 */
+            height: 297mm; /* Alto A4 */
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            overflow: hidden; /* Asegura que no se desborde */
+        }
+        
+        /* Aseguramos que el contenido dentro del A4 no se achique ni se agrande */
+        #cv-a4-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased">
+
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20 md:h-24">
+                <div class="flex-shrink-0">
+                    <img src="Gemini_Generated_Image_deumn8deumn8deum.png" alt="Logo Oscar De los Santos" class="h-16 md:h-20 w-auto">
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#perfil" class="nav-link text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Perfil</a>
+                        <a href="#experiencia" class="nav-link text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Experiencia</a>
+                        <a href="#habilidades" class="nav-link text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Habilidades</a>
+                        <a href="#formacion" class="nav-link text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Formación</a>
+                        <a href="#contacto" class="nav-link text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contacto</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <button id="download-pdf-button" class="hidden md:flex items-center bg-blue-600 text-white px-4 py-2 rounded-full font-semibold shadow-lg hover:bg-blue-700 transition-colors text-sm ml-4">
+                        <span id="download-text">Descargar CV</span>
+                        <span id="download-spinner" class="hidden w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
+                    </button>
+                    <div class="md:hidden ml-4">
+                        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-800 hover:bg-gray-200 focus:outline-none">
+                            <span class="sr-only">Abrir menú principal</span>
+                            <span class="text-2xl" id="menu-icon-open">☰</span>
+                            <span class="text-2xl hidden" id="menu-icon-close">✕</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#perfil" class="nav-link block text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium transition-colors">Perfil</a>
+                <a href="#experiencia" class="nav-link block text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium transition-colors">Experiencia</a>
+                <a href="#habilidades" class="nav-link block text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium transition-colors">Habilidades</a>
+                <a href="#formacion" class="nav-link block text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium transition-colors">Formación</a>
+                <a href="#contacto" class="nav-link block text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-base font-medium transition-colors">Contacto</a>
+                <button id="download-pdf-button-mobile" class="mt-4 w-full flex items-center justify-center bg-blue-600 text-white px-4 py-2 rounded-md font-semibold shadow-lg hover:bg-blue-700 transition-colors text-base">
+                    <span id="download-text-mobile">Descargar CV</span>
+                    <span id="download-spinner-mobile" class="hidden w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+        <section id="perfil" class="pt-16 -mt-16 mb-16 animated-fade-in">
+            <div class="text-center bg-white p-8 md:p-12 rounded-xl shadow-lg">
+                <div class="flex flex-col md:flex-row items-center justify-center md:justify-start space-y-6 md:space-y-0 md:space-x-8 mb-10">
+                    <div class="w-32 h-32 md:w-40 md:h-40 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-4 border-blue-200 shadow-inner flex-shrink-0">
+                        <!-- IMAGEN DE PERFIL AGREGADA AQUÍ --><img src="fotooscar.jpeg" alt="Foto de perfil de Oscar De los Santos" class="object-cover w-full h-full">
+                    </div>
+                    <div>
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2 md:text-left">Oscar Enrique De los Santos</h1>
+                        <p class="text-2xl md:text-3xl font-semibold text-blue-600 md:text-left">Chofer Profesional de Pasajeros</p>
+                    </div>
+                </div>
+                
+                <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-center mb-10">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <span class="block text-2xl font-bold text-blue-700">15+</span>
+                        <span class="text-sm text-blue-600">Años de Experiencia</span>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <span class="block text-2xl font-bold text-blue-700">D2 y E1</span>
+                        <span class="text-sm text-blue-600">Licencias Vigentes</span>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <span class="block text-2xl font-bold text-blue-700">Full Time</span>
+                        <span class="text-sm text-blue-600">Disponibilidad</span>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <span class="block text-2xl font-bold text-blue-700">100%</span>
+                        <span class="text-sm text-blue-600">Compromiso Seguridad</span>
+                    </div>
+                </div>
+
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed md:text-left">
+                    Chofer con más de 15 años de experiencia en transporte de pasajeros, distribución y mensajería urbana y provincial. Responsable, puntual y con amplio conocimiento de rutas locales. Comprometido con la seguridad vial, el mantenimiento preventivo de las unidades y la atención cordial al pasajero. Busco integrarme a una empresa de transporte donde pueda aportar mi experiencia y compromiso con la excelencia en el servicio.
+                </p>
+                <div class="mt-10 text-center md:text-left">
+                    <a href="https://wa.me/5493434726155" target="_blank" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-700 transition-colors text-lg">
+                        Contactar Ahora
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiencia" class="pt-16 -mt-16 mb-16 animated-fade-in">
+            <h2 class="text-3xl font-bold text-center mb-10">Experiencia Laboral</h2>
+            
+            <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center md:text-left">Experiencia Principal: Transporte de Pasajeros</h3>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-12 border-l-8 border-blue-600 hover-lift">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-3">
+                    <h4 class="text-2xl font-bold text-blue-700">Chofer de transporte urbano de pasajeros</h4>
+                    <span class="block text-lg font-semibold text-blue-600 sm:text-right mt-2 sm:mt-0">(Noviembre 2009 - Actualidad)</span>
+                </div>
+                <p class="text-xl text-gray-600 font-medium mb-5">Transporte Mariano Moreno — Paraná, Entre Ríos</p>
+                <ul class="list-disc list-inside text-gray-700 space-y-2 text-lg">
+                    <li>Conducción segura y eficiente en línea urbana, cumpliendo estrictamente con horarios y recorridos establecidos.</li>
+                    <li>Atención cordial al pasajero, gestión de consultas y control de boletos.</li>
+                    <li>Control mecánico diario y verificación de las condiciones de seguridad de la unidad.</li>
+                </ul>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center md:text-left">Otra Experiencia Relevante (Reparto y Logística)</h3>
+            <div id="experience-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="job-item bg-white rounded-xl shadow-lg p-6 h-full flex flex-col hover-lift">
+                    <h3 class="text-xl font-bold mb-2">Repartidor de correspondencia y medicamentos</h3>
+                    <p class="text-gray-600 font-medium mb-4">Correo Privado Sercar — Paraná</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 flex-grow">
+                        <li>Entrega en tiempo y forma en toda la provincia.</li>
+                    </ul>
+                </div>
+
+                <div class="job-item bg-white rounded-xl shadow-lg p-6 h-full flex flex-col hover-lift">
+                    <h3 class="text-xl font-bold mb-2">Repartidor y mensajero bancario</h3>
+                    <p class="text-gray-600 font-medium mb-4">Servijur y Ocasa — Paraná</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 flex-grow">
+                        <li>Clearing bancario y entrega de documentación confidencial.</li>
+                    </ul>
+                </div>
+
+                <div class="job-item bg-white rounded-xl shadow-lg p-6 h-full flex flex-col hover-lift">
+                    <h3 class="text-xl font-bold mb-2">Repositor y depósito</h3>
+                    <p class="text-gray-600 font-medium mb-4">ARCOR (Distribuidor Oficial Alberto V. Leineker) — Paraná</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 flex-grow">
+                        <li>Control de stock y distribución de productos alimenticios.</li>
+                    </ul>
+                </div>
+
+                <div class="job-item bg-white rounded-xl shadow-lg p-6 h-full flex flex-col hover-lift">
+                    <h3 class="text-xl font-bold mb-2">Repartidor - Repositor</h3>
+                    <p class="text-gray-600 font-medium mb-4">Fábricas de Sodas y Aguas MB — Paraná</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 flex-grow">
+                        <li>Distribución local y atención al cliente.</li>
+                    </ul>
+                </div>
+
+                <div class="job-item bg-white rounded-xl shadow-lg p-6 h-full flex flex-col hover-lift">
+                    <h3 class="text-xl font-bold mb-2">Viajante</h3>
+                    <p class="text-gray-600 font-medium mb-4">Guzmán Distribuciones — Paraná</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 flex-grow">
+                        <li>Promoción y entrega de productos en la región.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="habilidades" class="pt-16 -mt-16 mb-16 animated-fade-in">
+            <h2 class="text-3xl font-bold text-center mb-10">Habilidades y Capacitación</h2>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start"> 
+                    <div>
+                        <h3 class="text-2xl font-bold mb-5">Fortalezas Clave</h3>
+                        <ul class="text-lg text-gray-700 space-y-3 mb-8">
+                            <li class="flex items-center"><span class="text-blue-600 mr-2 font-bold">✓</span> Conductor responsable y confiable</li>
+                            <li class="flex items-center"><span class="text-blue-600 mr-2 font-bold">✓</span> Excelente trato interpersonal</li>
+                            <li class="flex items-center"><span class="text-blue-600 mr-2 font-bold">✓</span> Conocimiento de rutas urbanas y provinciales</li>
+                            <li class="flex items-center"><span class="text-blue-600 mr-2 font-bold">✓</span> Puntualidad y compromiso con la seguridad</li>
+                            <li class="flex items-center"><span class="text-blue-600 mr-2 font-bold">✓</span> Trabajo en equipo y bajo presión</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-5">Cursos Relevantes</h3>
+                        <ul class="text-lg text-gray-700 space-y-3">
+                            <li class="flex items-center"><span class="text-blue-600 mr-2 font-bold">✓</span> Seguridad Vial y Conducción Responsable</li>
+                            <li class="flex items-center"><span class="text-blue-600 mr-2 font-bold">✓</span> Mecánica básica del automotor</li>
+                            <li class="flex items-center"><span class="text-blue-600 mr-2 font-bold">✓</span> Operador de PC</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="formacion" class="pt-16 -mt-16 mb-16 animated-fade-in">
+            <h2 class="text-3xl font-bold text-center mb-10">Formación Académica</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center h-full hover-lift">
+                    <h3 class="text-xl font-bold mb-2">Administración de Empresas</h3>
+                    <p class="text-gray-600 font-medium mb-1">(2 años cursados)</p>
+                    <p class="text-gray-500">Instituto Santa Teresita — Paraná</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center h-full hover-lift">
+                    <h3 class="text-xl font-bold mb-2">Secundario Completo</h3>
+                    <p class="text-gray-600 font-medium mb-1">&nbsp;</p>
+                    <p class="text-gray-500">E.P.N.M. N°87 Paracao — Paraná</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center h-full hover-lift">
+                    <h3 class="text-xl font-bold mb-2">Primario Completo</h3>
+                    <p class="text-gray-600 font-medium mb-1">&nbsp;</p>
+                    <p class="text-gray-500">Escuela N°18 “Evaristo Carriego” — Paraná</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="pt-16 -mt-16 animated-fade-in">
+            <h2 class="text-3xl font-bold text-center mb-4">Datos y Contacto</h2>
+            <p class="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
+                Listo para una entrevista y disponible para incorporación inmediata.
+            </p>
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">Información Personal y Contacto</h3>
+                        <div class="space-y-4 mb-8 text-lg">
+                            <p class="flex items-center">
+                                <span class="text-blue-600 w-6 text-center mr-3 text-xl" aria-hidden="true">☎</span>
+                                <a href="https://wa.me/5493434726155" target="_blank" class="hover:text-blue-600 hover:underline">0343-154726155 (WhatsApp)</a>
+                            </p>
+                            <p class="flex items-center">
+                                <span class="text-blue-600 w-6 text-center mr-3 text-xl" aria-hidden="true">✉</span>
+                                <a href="mailto:pelado138@hotmail.com" class="hover:text-blue-600 hover:underline">pelado138@hotmail.com</a>
+                            </p>
+                            <p class="flex items-start">
+                                <span class="text-blue-600 w-6 text-center mr-3 pt-1 text-xl" aria-hidden="true">⌖</span>
+                                <span>Pascual Greca 823, Paraná, Entre Ríos (CP 3100)</span>
+                            </p>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-6">Datos Adicionales</h3>
+                        <div class="grid grid-cols-2 gap-4 text-gray-700">
+                            <div><strong class="text-gray-900">Edad:</strong> 41 años</div>
+                            <div><strong class="text-gray-900">DNI:</strong> 30.164.016</div>
+                            <div><strong class="text-gray-900">Nacionalidad:</strong> Argentina</div>
+                            <div><strong class="text-gray-900">Estado civil:</strong> Soltero (con hijo)</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">Credenciales y Referencias</h3>
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-3">Licencias de Conducir</h4>
+                            <p class="text-blue-700 text-lg font-bold mb-5">Clases D2 y E1 (vigentes)</p>
+                            
+                            <h4 class="text-xl font-semibold text-gray-800 mb-3">Referencias Laborales</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-bold text-gray-700">Transporte Mariano Moreno</p>
+                                    <p class="text-sm text-gray-600">Contacto: Cristian Leineker</p>
+                                    <p class="text-sm text-gray-600">Tel: 4351143 / 155447235</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-700">Correo Privado Sercar</p>
+                                    <p class="text-sm text-gray-600">Contacto: Juan José Álvarez</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-700">Fábricas de Sodas MB</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-700">Guzmán Distribuciones</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 mt-16">
+        <div class="container mx-auto px-6 py-6 text-center">
+            <p>&copy; 2025 - Perfil Profesional de Oscar Enrique De los Santos</p>
+        </div>
+    </footer>
+
+    <!-- Contenedor Oculto para Generar el PDF --><div id="cv-a4-container" class="hidden absolute left-[-9999px] top-0 w-[210mm] h-[297mm] bg-white">
+        <div id="cv-a4-content" class="flex w-full h-full">
+            
+            <!-- Barra Lateral (Azul) --><aside class="w-[35%] h-full bg-blue-700 text-white p-6 flex flex-col">
+                <div class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-4 border-blue-200 shadow-inner mx-auto">
+                    <!-- IMAGEN DE PERFIL AGREGADA AL PDF AQUÍ --><img src="fotooscar.jpeg" alt="Foto de perfil de Oscar De los Santos" class="object-cover w-full h-full">
+                </div>
+                <h1 class="text-2xl font-bold text-center mt-4">Oscar Enrique De los Santos</h1>
+                <p class="text-lg text-blue-100 text-center font-medium">Chofer Profesional</p>
+                
+                <hr class="border-t-2 border-blue-400 my-4">
+
+                <h2 class="text-lg font-bold text-blue-100 uppercase tracking-wider mb-2">Contacto</h2>
+                <div class="space-y-2 text-sm">
+                    <p>☎ 0343-154726155</p>
+                    <p>✉ pelado138@hotmail.com</p>
+                    <p>⌖ P. Greca 823, Paraná, ER</p>
+                </div>
+
+                <hr class="border-t border-blue-400 my-4">
+                
+                <h2 class="text-lg font-bold text-blue-100 uppercase tracking-wider mb-2">Licencias</h2>
+                <p class="text-lg font-bold">Clases D2 y E1 (Vigentes)</p>
+
+                <hr class="border-t border-blue-400 my-4">
+                
+                <h2 class="text-lg font-bold text-blue-100 uppercase tracking-wider mb-2">Habilidades</h2>
+                <ul class="list-disc list-inside text-sm space-y-1">
+                    <li>Conducción Responsable</li>
+                    <li>Excelente Trato Interpersonal</li>
+                    <li>Conocimiento de Rutas</li>
+                    <li>Puntualidad y Compromiso</li>
+                    <li>Mecánica Básica</li>
+                    <li>Seguridad Vial</li>
+                    <li>Trabajo bajo presión</li>
+                    <li>Operador de PC</li>
+                </ul>
+                
+                <hr class="border-t border-blue-400 my-4">
+
+                <h2 class="text-lg font-bold text-blue-100 uppercase tracking-wider mb-2">Formación</h2>
+                <div class="space-y-3 text-sm">
+                    <div>
+                        <p class="font-bold">Adm. de Empresas (2 años)</p>
+                        <p class="text-blue-100">Instituto Santa Teresita</p>
+                    </div>
+                    <div>
+                        <p class="font-bold">Secundario Completo</p>
+                        <p class="text-blue-100">E.P.N.M. N°87 Paracao</p>
+                    </div>
+                    <div>
+                        <p class="font-bold">Primario Completo</p>
+                        <p class="text-blue-100">Escuela N°18 “E. Carriego”</p>
+                    </div>
+                </div>
+
+                <hr class="border-t border-blue-400 my-4">
+
+                <h2 class="text-lg font-bold text-blue-100 uppercase tracking-wider mb-2">Datos</h2>
+                <div class="space-y-1 text-sm">
+                    <p><strong>Edad:</strong> 41 años</p>
+                    <p><strong>DNI:</strong> 30.164.016</p>
+                    <p><strong>Nacionalidad:</strong> Argentina</p>
+                    <p><strong>Estado Civil:</strong> Soltero (con hijo)</p>
+                    <p><strong>Disponibilidad:</strong> Full Time</p>
+                </div>
+            </aside>
+
+            <!-- Contenido Principal (Blanco) --><main class="w-[65%] h-full p-6 text-gray-900 overflow-y-hidden">
+                <section class="mb-4">
+                    <h2 class="text-xl font-bold text-blue-700 uppercase tracking-wider border-b-2 border-blue-700 pb-1 mb-2">Perfil Profesional</h2>
+                    <p class="text-xs leading-snug">
+                        Chofer con más de 15 años de experiencia en transporte de pasajeros, distribución y mensajería urbana y provincial. Responsable, puntual y con amplio conocimiento de rutas locales. Comprometido con la seguridad vial, el mantenimiento preventivo de las unidades y la atención cordial al pasajero. Busco integrarme a una empresa de transporte donde pueda aportar mi experiencia y compromiso.
+                    </p>
+                </section>
+
+                <section class="mb-4">
+                    <h2 class="text-xl font-bold text-blue-700 uppercase tracking-wider border-b-2 border-blue-700 pb-1 mb-3">Experiencia Laboral</h2>
+                    <div class="space-y-3">
+                        <!-- Experiencia Principal --><div class="text-xs">
+                            <p class="text-sm font-bold">Chofer de transporte urbano de pasajeros</p>
+                            <p class="font-semibold text-gray-700">Transporte Mariano Moreno (Nov 2009 - Actualidad)</p>
+                            <ul class="list-disc list-inside pl-2 text-gray-800 leading-snug">
+                                <li>Conducción segura en línea urbana y cumplimiento de horarios.</li>
+                                <li>Atención al pasajero y control de boletos.</li>
+                                <li>Control mecánico diario del vehículo.</li>
+                            </ul>
+                        </div>
+                        <!-- Otras Experiencias --><div class="text-xs">
+                            <p class="text-sm font-bold">Repartidor de correspondencia y medicamentos</p>
+                            <p class="font-semibold text-gray-700">Correo Privado Sercar (Provincial)</p>
+                        </div>
+                        <div class="text-xs">
+                            <p class="text-sm font-bold">Repartidor y mensajero bancario</p>
+                            <p class="font-semibold text-gray-700">Servijur y Ocasa (Clearing bancario)</p>
+                        </div>
+                        <div class="text-xs">
+                            <p class="text-sm font-bold">Repositor y depósito</p>
+                            <p class="font-semibold text-gray-700">ARCOR (Distribuidor Oficial A. V. Leineker)</p>
+                        </div>
+                        <div class="text-xs">
+                            <p class="text-sm font-bold">Repartidor - Repositor</p>
+                            <p class="font-semibold text-gray-700">Fábricas de Sodas y Aguas MB</p>
+                        </div>
+                        <div class="text-xs">
+                            <p class="text-sm font-bold">Viajante</p>
+                            <p class="font-semibold text-gray-700">Guzmán Distribuciones</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl font-bold text-blue-700 uppercase tracking-wider border-b-2 border-blue-700 pb-1 mb-3">Referencias Laborales</h2>
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <p class="font-bold text-gray-800">Transporte Mariano Moreno</p>
+                            <p class="text-gray-700">Contacto: Cristian Leineker</p>
+                            <p class="text-gray-700">Tel: 4351143 / 155447235</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800">Correo Privado Sercar</p>
+                            <p class="text-gray-700">Contacto: Juan José Álvarez</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800">Fábricas de Sodas MB</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800">Guzmán Distribuciones</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Lógica del Menú Hamburguesa ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('menu-icon-open');
+            const iconClose = document.getElementById('menu-icon-close');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                iconOpen.classList.toggle('hidden');
+                iconClose.classList.toggle('hidden');
+            });
+            
+            const mobileLinks = mobileMenu.querySelectorAll('a, button');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                });
+            });
+
+            // --- Lógica de Navegación Activa (ScrollSpy) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('header .nav-link');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-80px 0px 0px 0px',
+                threshold: 0.4 
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                let activeId = '';
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        activeId = entry.target.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${activeId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Lógica de Animación (Fade-in on Scroll) ---
+            const animatedElements = document.querySelectorAll('.animated-fade-in');
+            const animationObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach(el => {
+                animationObserver.observe(el);
+            });
+
+            // --- Lógica de Descarga de PDF ---
+            const downloadFunction = () => {
+                const downloadButton = document.getElementById('download-pdf-button');
+                const downloadSpinner = document.getElementById('download-spinner');
+                const downloadText = document.getElementById('download-text');
+                const mobileButton = document.getElementById('download-pdf-button-mobile');
+                const mobileSpinner = document.getElementById('download-spinner-mobile');
+                const mobileText = document.getElementById('download-text-mobile');
+                
+                const pdfContainer = document.getElementById('cv-a4-container');
+
+                // Mostrar estado de carga
+                downloadText.classList.add('hidden');
+                downloadSpinner.classList.remove('hidden');
+                downloadButton.disabled = true;
+                mobileText.classList.add('hidden');
+                mobileSpinner.classList.remove('hidden');
+                mobileButton.disabled = true;
+
+                // Mostrar el contenedor oculto para que html2canvas lo capture
+                pdfContainer.classList.remove('hidden');
+                pdfContainer.classList.add('flex'); // Aseguramos que se muestre
+
+                // *Fix de Robustez*: Esperar un breve momento para que el navegador renderice el div
+                setTimeout(() => {
+                    html2canvas(pdfContainer, {
+                        scale: 2, // Alta resolución
+                        useCORS: true,
+                        logging: false
+                    }).then(canvas => {
+                        const imgData = canvas.toDataURL('image/png');
+                        const { jsPDF } = window.jspdf; // Usar el constructor desde el objeto global
+                        
+                        // A4: 210mm x 297mm
+                        const pdf = new jsPDF({
+                            orientation: 'portrait',
+                            unit: 'mm',
+                            format: 'a4'
+                        });
+                        
+                        const pdfWidth = 210;
+                        const pdfHeight = 297;
+                        
+                        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                        pdf.save('CV-Oscar-DeLosSantos.pdf');
+
+                        // Ocultar contenedor y restaurar botones
+                        pdfContainer.classList.add('hidden');
+                        pdfContainer.classList.remove('flex');
+                        downloadText.classList.remove('hidden');
+                        downloadSpinner.classList.add('hidden');
+                        downloadButton.disabled = false;
+                        mobileText.classList.remove('hidden');
+                        mobileSpinner.classList.add('hidden');
+                        mobileButton.disabled = false;
+
+                    }).catch(err => {
+                        console.error("Error al generar el PDF:", err);
+                        // Restaurar botones incluso si hay error
+                        pdfContainer.classList.add('hidden');
+                        pdfContainer.classList.remove('flex');
+                        downloadText.classList.remove('hidden');
+                        downloadSpinner.classList.add('hidden');
+                        downloadButton.disabled = false;
+                        mobileText.classList.remove('hidden');
+                        mobileSpinner.classList.add('hidden');
+                        mobileButton.disabled = false;
+                    });
+                }, 250); // 250ms de espera para el renderizado
+            };
+
+            document.getElementById('download-pdf-button').addEventListener('click', downloadFunction);
+            document.getElementById('download-pdf-button-mobile').addEventListener('click', downloadFunction);
+        });
+    </script>
+</body>
+</html>
